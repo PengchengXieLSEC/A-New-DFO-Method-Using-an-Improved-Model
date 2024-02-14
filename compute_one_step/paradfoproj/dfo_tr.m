@@ -1,6 +1,5 @@
 function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options)
-  %UNTITLED7 此处显示有关此函数的摘要
-  %   此处显示详细说明
+ 
   f_hist = [];
 
   % start timing and set the paramters
@@ -14,8 +13,8 @@ all_options = struct("delta", 1.0, ... % initial delta (i.e. trust region radius
    "gamma1", 1, ... % radius shrink factor
    "max_iter", 1, ... % maximum number of iterations
    "eta0", 0.0, ... % step acceptance test (pred/ared) threshold
-   "eta1", 0.25, ... % (pred/ared) level to shrink radius
-   "eta2", 0.75, ... % (pred/ared) level to expand radius
+   "eta1", 0.25, ... 
+   "eta2", 0.75, ... %this is eta1 in the paper
    "tol_f", 1e-15, ... % threshold for abs(fprev - fnew)- used to stop
    "gamma2", 1, ... % radius expansion factor
    'tol_norm_g', 1e-15, ... % threshold for norm of gradient- used to stop
