@@ -1,6 +1,5 @@
 function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
-  %UNTITLED7 此处显示有关此函数的摘要
-  %   此处显示详细说明
+ 
   f_hist = [];
 
   % start timing and set the paramters
