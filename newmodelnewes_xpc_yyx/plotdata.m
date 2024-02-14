@@ -45,7 +45,7 @@
 % 
  load('T.mat');
 
-tauvalueindex=2;
+tauvalueindex=3;
 tauvalue=10^(-tauvalueindex);
   % T=Ttau(commonElements,:,tauvalueindex);
 
