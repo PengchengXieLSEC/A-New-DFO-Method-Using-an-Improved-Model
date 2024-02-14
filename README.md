@@ -34,11 +34,13 @@ A. For Example 4.1, go to the file "compute_one_step"
     for the historical iteration points' function values
 
 
-B. For performance and data profiles, go to the file "newmodelnewes_xpc_yyx"
+B. For performance and data profiles (can try different parameters), go to the file "newmodelnewes_xpc_yyx"
 
     1. please run main.m to obtain the raw datas "frec" and "T".
     
     2. please run "plotperf.m" and "plotdata.m" to obtain the performance profiles and data profiles 
+       
+       (with corresponding title containing the correct tau's value of the plots)
 
 Remark: in perfdata.m, please change the range of tau to obtain results with different accuracy:
 
@@ -53,13 +55,15 @@ Notice that CMA-ES contains random parts, and thus you can directly
 
 reproduce the result in our paper by the following step:
 
+0. go to the file "newmodelnewes_xpc_yyx"
+
 1. please load frec.mat 
 
 (can be downloaded from https://drive.google.com/drive/folders/1p4ghUue2NI9yk2TbhjsMW-yxy_pxJoo8?usp=sharing) 
 
 by typing "load('frec.mat',frec)" in the commend line of MATLAB
 
-2. please run the following codes to obtain the performance profiles and data profiles shown in the paper
+2. please run the following codes to obtain the "T" used by performance profiles and data profiles shown in the paper
 
     [np, ns, ~, ~] = size(frec);
    
@@ -77,4 +81,8 @@ by typing "load('frec.mat',frec)" in the commend line of MATLAB
         profilex(frec, fmin, tau, 'plain');
    
     end
+
+3. please run "plotperf.m" and "plotdata.m" to obtain the performance profiles and data profiles 
+       
+       (with corresponding title containing the correct tau's value of the plots)
 
