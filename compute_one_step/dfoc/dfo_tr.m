@@ -1,3 +1,45 @@
+% A DFO Method Using a New Model
+% Codes for the paper entitled
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% Copyright: Pengcheng Xie & Ya-xiang Yuan
+
+% Connect: xpc@lsec.cc.ac.cn
+% A DFO Method Using a New Model
+% ----------------------------------------------------------
+% License Information
+
+% ----------------------------------------------------------
+% This code is distributed under the MIT License.
+% You should have received a copy of the MIT License along
+% with this program. If not, see <https://opensource.org/licenses/MIT>.
+
+% For further information or questions, contact the authors
+% via the provided email address.
+% ----------------------------------------------------------
+% Code Version Information
+
+% ----------------------------------------------------------
+% Version: 1.0
+% Changes: Initial release.
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% References
+% ----------------------------------------------------------
+% For more information, refer to the paper:
+
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% by Pengcheng Xie & Ya-xiang Yuan.
+%
+% If you use this code in your research, please cite the above paper.
+
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+% Contributors
+% ----------------------------------------------------------
+
+% This code was written by Pengcheng Xie & Ya-xiang Yuan.
+% ----------------------------------------------------------
 function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
  
   f_hist = [];
@@ -8,19 +50,19 @@ function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
   %%
   % see the param class for the description of parameters
 all_options = struct("delta", 1.0, ... % initial delta (i.e. trust region radius)
-    "tol_delta", 1e-10, ... % smallest delta to stop
+    "tol_delta", 1e-6, ... % smallest delta to stop
     "max_delta", 100.0, ... % max possible delta
     "gamma1", 1, ... % radius shrink factor
     "max_iter", 1, ... % maximum number of iterations
     "eta0", 0.0, ... % step acceptance test (pred/ared) threshold
     "eta1", 0.25, ... 
     "eta2", 0.75, ... %this is eta1 in the paper
-    "tol_f", 1e-15, ... % threshold for abs(fprev - fnew)- used to stop
+    "tol_f", 1e-6, ... % threshold for abs(fprev - fnew)- used to stop
     "gamma2", 1, ... % radius expansion factor
-    'tol_norm_g', 1e-15, ... % threshold for norm of gradient- used to stop
+    'tol_norm_g', 1e-5, ... % threshold for norm of gradient- used to stop
     'tol_norm_H', 1e-10, ... % threshold for the (frobenius) norm of H
     "min_del_crit", 1e-8, ... % minimum delta for the criticality step
-    "min_s_crit", 0.1); % minimum step for the criticality step};
+    "min_s_crit", 1e-8); % minimum step for the criticality step};
 
   field = fieldnames(options);
   length = size(field, 1);
@@ -88,9 +130,6 @@ maxY = n + 1;
     Y = repmat(x_initial, 1, 2 * func_n) + 0.5 * delta * [eye(func_n), -eye(func_n)];
     Y = [x_initial, Y];
 elseif strcmp(option_build, "manual")
-    %         Y1 = reshape([150.00, 150.00, 230.00, 150.00], func_n, 1);
-    %         Y2 = reshape([150.00, 8.00, 230.00, 250.00], func_n, 1);
-    %         Y3 = reshape([150.00, 50.00, 230.00, 230.00], func_n, 1);
   Y1 = reshape([2.5 0], func_n, 1);
   Y2 = reshape([2 0.5], func_n, 1);
 Y1=x_initial+reshape([1 0], func_n, 1);
@@ -136,18 +175,7 @@ Y2=x_initial+reshape([0 1], func_n, 1);
   while 1
     success = 0;
 
-    % shift_Y = Y - np.dot(np.diag(Y[:, 0]), np.ones((n, nY)))
-    % print('被用来减去的Q_value的Y', Y)
-    % for j = 1:nY
-      % Yzhuan = reshape(Y(1:end, j), 1, n);
-      % g_hat_hist_rot = reshape(g_hat_hist(1:end, 1, end), 1, n);
-      % Q_value(j) = 0.5 * Yzhuan * H_hist(1:end, 1:end, end) * Y(1:end, j) + g_hat_hist_rot * Y(1:end, j) + c_hat_hist(end);
-    % end
-    % print('被用来减去的Q_value', Q_value)
-    % print('被用来减去的f_value', f_values)
 
-    % f_min_Q_values = f_values - Q_value;
-    % print('f_min_Q', f_min_Q_values)
     % construct the quadratic model
     if step == 1
       [H, g_hat, c_hat] = quad_frob(Y, f_values);
@@ -155,17 +183,8 @@ Y2=x_initial+reshape([0 1], func_n, 1);
       %[H, g_hat, c_hat] = quad_frob(Y, f_values);
       [H, g_hat, c_hat] = quad_frob_new(Y, f_values, para, s, delta, eta2, rho);
     end
-    % 加前一步的H和g，没有c; 第k轮，加上第k-1的H和g，c  *** 2
-    % print('Hg',(H, g))
-    % Q_test = zeros(nY, 1);
-    % for j = 1:nY
-    %   Q_test(j) = 0.5 * Y(1:end, j)' * H * Y(1:end, j) + g_hat' * Y(1:end, j) + c_hat;
-    % end
 
-    %H = H + H_hist(1:end, 1:end, end); H_hist(1:end, 1:end, end+1)=H;
-
-    %g_hat = g_hat + g_hat_hist(1:end, 1, end); g_hat_hist(1:end, 1, end+1)=g_hat;
-    %c_hat = c_hat + c_hat_hist(end); c_hat_hist(end+1)=c_hat;
+   
     guodu = H * Y(1:end, 1);
     g = g_hat + guodu(:);
     c = c_hat - 0.5 * Y(1:end, 1)' * H * Y(1:end, 1) - g' * Y(1:end, 1);
@@ -276,7 +295,7 @@ Y2=x_initial+reshape([0 1], func_n, 1);
       nY = size(Y, 2);
     end
 
-    % 从第二次开始，每次执行新quad_frob_new
+
     step = 2;
   end
 

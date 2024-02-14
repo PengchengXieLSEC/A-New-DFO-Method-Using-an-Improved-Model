@@ -1,3 +1,45 @@
+% A DFO Method Using a New Model
+% Codes for the paper entitled
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% Copyright: Pengcheng Xie & Ya-xiang Yuan
+
+% Connect: xpc@lsec.cc.ac.cn
+% A DFO Method Using a New Model
+% ----------------------------------------------------------
+% License Information
+
+% ----------------------------------------------------------
+% This code is distributed under the MIT License.
+% You should have received a copy of the MIT License along
+% with this program. If not, see <https://opensource.org/licenses/MIT>.
+
+% For further information or questions, contact the authors
+% via the provided email address.
+% ----------------------------------------------------------
+% Code Version Information
+
+% ----------------------------------------------------------
+% Version: 1.0
+% Changes: Initial release.
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% References
+% ----------------------------------------------------------
+% For more information, refer to the paper:
+
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% by Pengcheng Xie & Ya-xiang Yuan.
+%
+% If you use this code in your research, please cite the above paper.
+
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+% Contributors
+% ----------------------------------------------------------
+
+% This code was written by Pengcheng Xie & Ya-xiang Yuan.
+% ----------------------------------------------------------
 function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options)
   
   f_hist = [];
@@ -15,12 +57,12 @@ all_options = struct("delta", 1.0, ... % initial delta (i.e. trust region radius
     "eta0", 0.0, ... % step acceptance test (pred/ared) threshold
     "eta1", 0.25, ... 
     "eta2", 0.75, ... %this is eta1 in the paper
-    "tol_f", 1e-15, ... % threshold for abs(fprev - fnew)- used to stop
+    "tol_f", 1e-6, ... % threshold for abs(fprev - fnew)- used to stop
     "gamma2", 1, ... % radius expansion factor
-    'tol_norm_g', 1e-15, ... % threshold for norm of gradient- used to stop
+    'tol_norm_g', 1e-5, ... % threshold for norm of gradient- used to stop
     'tol_norm_H', 1e-10, ... % threshold for the (frobenius) norm of H
     "min_del_crit", 1e-8, ... % minimum delta for the criticality step
-    "min_s_crit", 0.1); % minimum step for the criticality step};
+    "min_s_crit", 1e-8); % minimum step for the criticality step};
 
   field = fieldnames(options);
   length = size(field, 1);
@@ -88,9 +130,6 @@ maxY = n + 1;
     Y = repmat(x_initial, 1, 2 * func_n) + 0.5 * delta * [eye(func_n), -eye(func_n)];
     Y = [x_initial, Y];
 elseif strcmp(option_build, "manual")
-   %         Y1 = reshape([150.00, 150.00, 230.00, 150.00], func_n, 1);
-   %         Y2 = reshape([150.00, 8.00, 230.00, 250.00], func_n, 1);
-   %         Y3 = reshape([150.00, 50.00, 230.00, 230.00], func_n, 1);
  Y1 = reshape([2.5 0], func_n, 1);
  Y2 = reshape([2 0.5], func_n, 1);
  %Y3 = reshape([2.5 0], func_n, 1);

@@ -1,3 +1,45 @@
+% A DFO Method Using a New Model
+% Codes for the paper entitled
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% Copyright: Pengcheng Xie & Ya-xiang Yuan
+
+% Connect: xpc@lsec.cc.ac.cn
+% A DFO Method Using a New Model
+% ----------------------------------------------------------
+% License Information
+
+% ----------------------------------------------------------
+% This code is distributed under the MIT License.
+% You should have received a copy of the MIT License along
+% with this program. If not, see <https://opensource.org/licenses/MIT>.
+
+% For further information or questions, contact the authors
+% via the provided email address.
+% ----------------------------------------------------------
+% Code Version Information
+
+% ----------------------------------------------------------
+% Version: 1.0
+% Changes: Initial release.
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% References
+% ----------------------------------------------------------
+% For more information, refer to the paper:
+
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% by Pengcheng Xie & Ya-xiang Yuan.
+%
+% If you use this code in your research, please cite the above paper.
+
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+% Contributors
+% ----------------------------------------------------------
+
+% This code was written by Pengcheng Xie & Ya-xiang Yuan.
+% ----------------------------------------------------------
 function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
  
   f_hist = [];
@@ -15,12 +57,12 @@ function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
     "eta0", 0.0, ... % step acceptance test (pred/ared) threshold
     "eta1", 0.25, ... 
     "eta2", 0.75, ... %this is eta1 in the paper
-    "tol_f", 1e-15, ... % threshold for abs(fprev - fnew)- used to stop
+    "tol_f", 1e-6, ... % threshold for abs(fprev - fnew)- used to stop
     "gamma2", 1, ... % radius expansion factor
-    'tol_norm_g', 1e-15, ... % threshold for norm of gradient- used to stop
+    'tol_norm_g', 1e-5, ... % threshold for norm of gradient- used to stop
     'tol_norm_H', 1e-10, ... % threshold for the (frobenius) norm of H
     "min_del_crit", 1e-8, ... % minimum delta for the criticality step
-    "min_s_crit", 0.1); % minimum step for the criticality step};
+    "min_s_crit", 1e-8); % minimum step for the criticality step};
 
   field = fieldnames(options);
   length = size(field, 1);
@@ -136,8 +178,7 @@ Y2=x_initial+reshape([0 1], func_n, 1);
   while 1
     success = 0;
 
-    % shift_Y = Y - np.dot(np.diag(Y[:, 0]), np.ones((n, nY)))
-    % print('被用来减去的Q_value的Y', Y)
+  
     for j = 1:nY
       % Yzhuan = reshape(Y(1:end, j), 1, n);
       % g_hat_hist_rot = reshape(g_hat_hist(1:end, 1, end), 1, n);
@@ -146,8 +187,7 @@ Y2=x_initial+reshape([0 1], func_n, 1);
       g_hat_hist_rot = g_hat_hist(:,end)';
       Q_value(j) = 0.5 * Yzhuan  * H_hist(:, :, end) * Y(:, j) +  g_hat_hist_rot * Y(:, j)+ c_hat_hist(end);
     end
-    % print('被用来减去的Q_value', Q_value)
-    % print('被用来减去的f_value', f_values)
+
 
     f_min_Q_values = f_values - Q_value;
     % print('f_min_Q', f_min_Q_values)
@@ -163,7 +203,7 @@ Y2=x_initial+reshape([0 1], func_n, 1);
         % [H, g_hat, c_hat] = quad_frob_new(Y, f_min_Q_values);
       
     end
-    % 加前一步的H和g，没有c; 第k轮，加上第k-1的H和g，c  *** 2
+    
     % print('Hg',(H, g))
     % Q_test = zeros(nY, 1);
     % for j = 1:nY
@@ -284,7 +324,6 @@ Y2=x_initial+reshape([0 1], func_n, 1);
       nY = size(Y, 2);
     end
 
-    % 从第二次开始，每次执行新quad_frob_new
     step = 2;
   end
 

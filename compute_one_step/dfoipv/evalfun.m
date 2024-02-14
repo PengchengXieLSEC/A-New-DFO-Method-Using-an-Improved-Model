@@ -1,8 +1,50 @@
+% A DFO Method Using a New Model
+% Codes for the paper entitled
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% Copyright: Pengcheng Xie & Ya-xiang Yuan
+
+% Connect: xpc@lsec.cc.ac.cn
+% A DFO Method Using a New Model
+% ----------------------------------------------------------
+% License Information
+
+% ----------------------------------------------------------
+% This code is distributed under the MIT License.
+% You should have received a copy of the MIT License along
+% with this program. If not, see <https://opensource.org/licenses/MIT>.
+
+% For further information or questions, contact the authors
+% via the provided email address.
+% ----------------------------------------------------------
+% Code Version Information
+
+% ----------------------------------------------------------
+% Version: 1.0
+% Changes: Initial release.
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% References
+% ----------------------------------------------------------
+% For more information, refer to the paper:
+
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% by Pengcheng Xie & Ya-xiang Yuan.
+%
+% If you use this code in your research, please cite the above paper.
+
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+% Contributors
+% ----------------------------------------------------------
+
+% This code was written by Pengcheng Xie & Ya-xiang Yuan.
+% ----------------------------------------------------------
 function [fun, info] = evalfun(name, x, n)
     %% TestProblemF
-    % Ê¹ÓÃ94ÖÖ¾­µäµÄÓÅ»¯ÎÊÌâµÄÄ¿±êº¯ÊıÖĞµÄÒ»ÖÖ
-    % ÊäÈë£ºx×Ô±äÁ¿,nÊÇÎÊÌâµÄÎ¬Êı£¬nameÊÇÊ¹ÓÃÄ¿±êº¯ÊıµÄÃû³Æ£¬ĞèÒªÒÔ×Ö·û´®ÊäÈë£¬Èç'arglina'
-    % Êä³ö£º funÊÇº¯ÊıÖµ£¬info±íÊ¾µÄÊÇÊÇ·ñÕı³£Ê¹ÓÃ£¬info=0±íÊ¾Õı³£¡£
+    % ä½¿ç”¨94ç§ç»å…¸çš„ä¼˜åŒ–é—®é¢˜çš„ç›®æ ‡å‡½æ•°ä¸­çš„ä¸€ç§
+    % è¾“å…¥ï¼šxè‡ªå˜é‡,næ˜¯é—®é¢˜çš„ç»´æ•°ï¼Œnameæ˜¯ä½¿ç”¨ç›®æ ‡å‡½æ•°çš„åç§°ï¼Œéœ€è¦ä»¥å­—ç¬¦ä¸²è¾“å…¥ï¼Œå¦‚'arglina'
+    % è¾“å‡ºï¼š funæ˜¯å‡½æ•°å€¼ï¼Œinfoè¡¨ç¤ºçš„æ˜¯æ˜¯å¦æ­£å¸¸ä½¿ç”¨ï¼Œinfo=0è¡¨ç¤ºæ­£å¸¸ã€‚
     %%
     INFINITY = 1.0e308;
     f = INFINITY;

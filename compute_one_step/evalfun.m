@@ -1,9 +1,48 @@
+% A DFO Method Using a New Model
+% Codes for the paper entitled
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% Copyright: Pengcheng Xie & Ya-xiang Yuan
+
+% Connect: xpc@lsec.cc.ac.cn
+% A DFO Method Using a New Model
+% ----------------------------------------------------------
+% License Information
+
+% ----------------------------------------------------------
+% This code is distributed under the MIT License.
+% You should have received a copy of the MIT License along
+% with this program. If not, see <https://opensource.org/licenses/MIT>.
+
+% For further information or questions, contact the authors
+% via the provided email address.
+% ----------------------------------------------------------
+% Code Version Information
+
+% ----------------------------------------------------------
+% Version: 1.0
+% Changes: Initial release.
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% References
+% ----------------------------------------------------------
+% For more information, refer to the paper:
+
+% "A Derivative-free Method Using a New Under-determined Quadratic Interpolation Model"
+% by Pengcheng Xie & Ya-xiang Yuan.
+%
+% If you use this code in your research, please cite the above paper.
+
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+% Contributors
+% ----------------------------------------------------------
+
+% This code was written by Pengcheng Xie & Ya-xiang Yuan.
+% ----------------------------------------------------------
 function [fun, info] = evalfun(name, x, n)
     %% TestProblemF
-    % 使用94种经典的优化问题的目标函数中的一种
-    % 输入：x自变量,n是问题的维数，name是使用目标函数的名称，需要以字符串输入，如'arglina'
-    % 输出： fun是函数值，info表示的是是否正常使用，info=0表示正常。
-    %%
+
     INFINITY = 1.0e308;
     f = INFINITY;
     info = 0; % info = 0 means successful evaluation
