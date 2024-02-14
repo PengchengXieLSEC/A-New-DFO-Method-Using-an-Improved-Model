@@ -15,7 +15,7 @@ all_options = struct("delta", 1.0, ... % initial delta (i.e. trust region radius
     "max_iter", 1, ... % maximum number of iterations
     "eta0", 0.0, ... % step acceptance test (pred/ared) threshold
     "eta1", 0.25, ... 
-    "eta2", 0.75, ... %eta1 in the paper
+    "eta2", 0.75, ... %this is eta1 in the paper
     "tol_f", 1e-15, ... % threshold for abs(fprev - fnew)- used to stop
     "gamma2", 1, ... % radius expansion factor
     'tol_norm_g', 1e-15, ... % threshold for norm of gradient- used to stop
