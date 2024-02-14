@@ -176,14 +176,13 @@ function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
     success = 0;
 
     % shift_Y = Y - np.dot(np.diag(Y[:, 0]), np.ones((n, nY)))
-    % print('被用来减去的Q_value的Y', Y)
+
     % for j = 1:nY
       % Yzhuan = reshape(Y(1:end, j), 1, n);
       % g_hat_hist_rot = reshape(g_hat_hist(1:end, 1, end), 1, n);
       % Q_value(j) = 0.5 * Yzhuan * H_hist(1:end, 1:end, end) * Y(1:end, j) + g_hat_hist_rot * Y(1:end, j) + c_hat_hist(end);
     % end
-    % print('被用来减去的Q_value', Q_value)
-    % print('被用来减去的f_value', f_values)
+
 
     % f_min_Q_values = f_values - Q_value;
     % print('f_min_Q', f_min_Q_values)
@@ -194,7 +193,7 @@ function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
       %[H, g_hat, c_hat] = quad_frob(Y, f_values);
       [H, g_hat, c_hat] = quad_frob_new(Y, f_values, para, s, delta, eta2, rho);
     end
-    % 加前一步的H和g，没有c; 第k轮，加上第k-1的H和g，c  *** 2
+   
     % print('Hg',(H, g))
     % Q_test = zeros(nY, 1);
     % for j = 1:nY
@@ -315,7 +314,7 @@ function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
       nY = size(Y, 2);
     end
 
-    % 从第二次开始，每次执行新quad_frob_new
+  
     step = 2;
   end
 
