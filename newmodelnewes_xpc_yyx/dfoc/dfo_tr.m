@@ -12,8 +12,8 @@ function [res, iteration, f_hist] = dfo_tr(bb_func, x_initial, options, para)
     "gamma1", 0.8, ... % radius shrink factor
     "max_iter", 100*size(x_initial,1), ... % maximum number of iterations
     "eta0", 0.0, ... % step acceptance test (pred/ared) threshold
-    "eta1", 0.25, ... % (pred/ared) level to shrink radius
-    "eta2", 0.75, ... % (pred/ared) level to expand radius
+    "eta1", 0.25, ...
+    "eta2", 0.75, ... %this is eta1 in the paper
     "tol_f", 1e-15, ... % threshold for abs(fprev - fnew)- used to stop
     "gamma2", 1.5, ... % radius expansion factor
     'tol_norm_g', 1e-15, ... % threshold for norm of gradient- used to stop
