@@ -35,10 +35,6 @@
 
 % ----------------------------------------------------------
 % ----------------------------------------------------------
-% Contributors
-% ----------------------------------------------------------
-
-% This code was written by Pengcheng Xie & Ya-xiang Yuan.
 % ----------------------------------------------------------
 function [xb, rhobeg, fopt, info] = setuptest (fun, n)
     % Set up x0, rhobeg, and fopt for the test.
